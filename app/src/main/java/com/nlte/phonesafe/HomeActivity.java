@@ -49,7 +49,6 @@ public class HomeActivity extends AppCompatActivity {
                         }else {//否则进入到输入密码对话框
                             showAuthorDialog();
                         }
-
                         break;
                     case 1://通信卫士
 

@@ -12,6 +12,7 @@ public class CacheUtil {
     public static final String APK_UPDATE = "apk_update";//是否存在存在更新
     public static final String CONFIG_SP = "config_sp";//config_sp.xml文件
     public static final String IS_FIRST_USE = "is_first_use";//是否第一次使用
+    public static java.lang.String PROTECT_SETTING = "protect_setting";
 
     /*获取SharedPrefenence对象*/
     private static SharedPreferences getSPreference(Context context){
