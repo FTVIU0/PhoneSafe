@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context="com.nlte.phonesafe.SettingActivity">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:background="#8b71ef9d"
+        android:text="设置中心"/>
+    <com.nlte.phonesafe.com.nlte.phonesafe.view.SettingView
+        android:id="@+id/update_sv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:setting_title="自动升级"
+        app:setting_des_on="自动升级开启"
+        app:setting_des_off="自动升级关闭" />
+    <com.nlte.phonesafe.com.nlte.phonesafe.view.SettingView
+        android:id="@+id/soft_sv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:setting_title="软件锁"
+        app:setting_des_on="软件锁开启"
+        app:setting_des_off="软件锁关闭" />
+
+</LinearLayout>
