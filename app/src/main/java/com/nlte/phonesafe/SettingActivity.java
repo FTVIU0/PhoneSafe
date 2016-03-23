@@ -4,12 +4,9 @@ import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.TextView;
 
-import com.nlte.phonesafe.com.nlte.phonesafe.utils.CacheUtil;
-import com.nlte.phonesafe.com.nlte.phonesafe.view.SettingView;
+import com.nlte.phonesafe.utils.CacheUtil;
+import com.nlte.phonesafe.view.SettingView;
 
 public class SettingActivity extends AppCompatActivity {
     private Context context;

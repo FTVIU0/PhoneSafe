@@ -3,7 +3,6 @@ package com.nlte.phonesafe;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
@@ -11,8 +10,8 @@ import android.view.animation.RotateAnimation;
 import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 
-import com.nlte.phonesafe.com.nlte.phonesafe.utils.CacheUtil;
-import com.nlte.phonesafe.com.nlte.phonesafe.utils.ToastUtil;
+import com.nlte.phonesafe.utils.CacheUtil;
+import com.nlte.phonesafe.utils.ToastUtil;
 
 public class WelcomeActivity extends AppCompatActivity {
 

@@ -20,14 +20,11 @@ import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
-import com.nlte.phonesafe.com.nlte.phonesafe.utils.CacheUtil;
-import com.nlte.phonesafe.com.nlte.phonesafe.utils.Constants;
-import com.nlte.phonesafe.com.nlte.phonesafe.utils.ToastUtil;
+import com.nlte.phonesafe.utils.CacheUtil;
+import com.nlte.phonesafe.utils.Constants;
+import com.nlte.phonesafe.utils.ToastUtil;
 
 import org.json.JSONObject;
-import org.xutils.common.Callback;
-import org.xutils.http.RequestParams;
-import org.xutils.x;
 
 import java.io.BufferedReader;
 import java.io.File;

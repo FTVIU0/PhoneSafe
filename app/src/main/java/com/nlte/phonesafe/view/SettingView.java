@@ -1,4 +1,4 @@
-package com.nlte.phonesafe.com.nlte.phonesafe.view;
+package com.nlte.phonesafe.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -8,8 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.nlte.phonesafe.R;
-import com.nlte.phonesafe.com.nlte.phonesafe.utils.CacheUtil;
-import com.nlte.phonesafe.com.nlte.phonesafe.utils.LogUtil;
+import com.nlte.phonesafe.utils.CacheUtil;
 
 /**自定义组合控件
  * Created by NLTE on 2016/3/22 0022.

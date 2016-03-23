@@ -23,7 +23,7 @@
         <!--android:focusable="true"-->
         <!--android:focusableInTouchMode="true"-->
         <!--android:ellipsize="marquee"/>-->
-    <com.nlte.phonesafe.com.nlte.phonesafe.view.FocusableTextView
+    <com.nlte.phonesafe.view.FocusableTextView
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:gravity="center_vertical"

@@ -1,4 +1,4 @@
-package com.nlte.phonesafe.com.nlte.phonesafe;
+package com.nlte.phonesafe;
 
 import android.app.Application;
 

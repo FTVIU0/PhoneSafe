@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.nlte.phonesafe.com.nlte.phonesafe.utils.CacheUtil;
+import com.nlte.phonesafe.utils.CacheUtil;
 
 import java.util.ArrayList;
 import java.util.List;

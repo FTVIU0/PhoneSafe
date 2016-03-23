@@ -1,4 +1,4 @@
-package com.nlte.phonesafe.com.nlte.phonesafe.view;
+package com.nlte.phonesafe.view;
 
 import android.content.Context;
 import android.util.AttributeSet;

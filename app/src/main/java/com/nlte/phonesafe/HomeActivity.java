@@ -13,10 +13,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 
-import com.nlte.phonesafe.com.nlte.phonesafe.adapter.HomeAdapter;
-import com.nlte.phonesafe.com.nlte.phonesafe.utils.CacheUtil;
-import com.nlte.phonesafe.com.nlte.phonesafe.utils.MD5;
-import com.nlte.phonesafe.com.nlte.phonesafe.utils.ToastUtil;
+import com.nlte.phonesafe.adapter.HomeAdapter;
+import com.nlte.phonesafe.utils.CacheUtil;
+import com.nlte.phonesafe.utils.MD5;
+import com.nlte.phonesafe.utils.ToastUtil;
 
 public class HomeActivity extends AppCompatActivity {
     private Context context;

@@ -4,7 +4,7 @@ import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.nlte.phonesafe.com.nlte.phonesafe.utils.CacheUtil;
+import com.nlte.phonesafe.utils.CacheUtil;
 
 public class LostFindActivity extends AppCompatActivity {
     private Context context;

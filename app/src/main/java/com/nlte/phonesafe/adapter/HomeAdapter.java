@@ -1,4 +1,4 @@
-package com.nlte.phonesafe.com.nlte.phonesafe.adapter;
+package com.nlte.phonesafe.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;

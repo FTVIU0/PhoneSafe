@@ -1,4 +1,4 @@
-package com.nlte.phonesafe.com.nlte.phonesafe.utils;
+package com.nlte.phonesafe.utils;
 
 /**项目中的常量
  * Created by NLTE on 2016/3/16 0016.

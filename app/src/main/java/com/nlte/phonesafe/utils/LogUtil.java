@@ -1,4 +1,4 @@
-package com.nlte.phonesafe.com.nlte.phonesafe.utils;
+package com.nlte.phonesafe.utils;
 
 import android.util.Log;
 
