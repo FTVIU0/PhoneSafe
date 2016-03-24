@@ -1,6 +1,7 @@
 package com.nlte.phonesafe;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -17,8 +18,11 @@ public class LostFindActivity extends AppCompatActivity {
             //进入手机防盗展示界
             setContentView(R.layout.activity_lost_find);
         } else {
-            //进入设置向导界面
-
+            //进入到设置向导界面
+            Intent intent=new Intent();
+            intent.setClass(context, Setup1Activity.class);
+            startActivity(intent);
+            finish();
         }
     }
 }

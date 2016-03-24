@@ -24,9 +24,10 @@
         android:layout_marginRight="10dp"
         android:hint="安全号码"/>
     <Button
+        android:id="@+id/select_contact_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="selectContactTv"
+        android:onClick="selectContact"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:text="选择联系人"/>

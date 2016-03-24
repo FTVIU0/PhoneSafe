@@ -7,12 +7,13 @@ import android.content.SharedPreferences;
  * Created by NLTE on 2016/3/14 0014.
  */
 public class CacheUtil {
-    public static final String SAFE_PASSWOED = "";//保存手机防盗密码
+    public static final String SAFE_PASSWOED = "safe_passwoed";//保存手机防盗密码
     private static SharedPreferences mSp;
     public static final String APK_UPDATE = "apk_update";//是否存在存在更新
     public static final String CONFIG_SP = "config_sp";//config_sp.xml文件
     public static final String IS_FIRST_USE = "is_first_use";//是否第一次使用
-    public static java.lang.String PROTECT_SETTING = "protect_setting";
+    public static String PROTECT_SETTING = "protect_setting";
+    public static String SIM = "sim";//SIM卡串号
 
     /*获取SharedPrefenence对象*/
     private static SharedPreferences getSPreference(Context context){

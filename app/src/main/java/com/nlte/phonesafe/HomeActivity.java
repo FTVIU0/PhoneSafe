@@ -37,6 +37,7 @@ public class HomeActivity extends AppCompatActivity {
          */
         GridView gridView = (GridView)findViewById(R.id.home_gv);
         gridView.setAdapter(new HomeAdapter(this));
+        // 对网格视图实现点击网各项监听
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -74,6 +75,8 @@ public class HomeActivity extends AppCompatActivity {
                     case 8://设置中心
                         intent.setClass(context, SettingActivity.class);
                         startActivity(intent);
+                        break;
+                    default:
                         break;
                 }
             }
@@ -114,11 +117,12 @@ public class HomeActivity extends AppCompatActivity {
                 if (TextUtils.isEmpty(pwd)){
                     ToastUtil.show(context, "输入密码不能为空");
                 }else if (MD5.getMD5(pwd).equals(CacheUtil.getString(context, CacheUtil.SAFE_PASSWOED))){
-                    ToastUtil.show(context, "验证成功");
+//                    ToastUtil.show(context, "验证成功");
+                    Intent intent = new Intent(context, LostFindActivity.class);
+                    startActivity(intent);
                     mDialog.dismiss();
                 }else {
                     ToastUtil.show(context, "验证不成功");
-                    pwdEt.setText("");
                 }
             }
         });
