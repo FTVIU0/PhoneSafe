@@ -7,9 +7,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.nlte.phonesafe.Setup2Activity">
-    <TextView
-        style="@style/TitleBarStyle"
-        android:text="2 手机卡绑定"/>
+    <!--<TextView-->
+        <!--style="@style/TitleBarStyle"-->
+        <!--android:text="2 手机卡绑定"/>-->
+    <include layout="@layout/title_bar"/>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -6,9 +6,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.nlte.phonesafe.Setup1Activity">
-    <TextView
-        style="@style/TitleBarStyle"
-        android:text="1 欢迎使用手机防盗"/>
+    <!--<TextView-->
+        <!--style="@style/TitleBarStyle"-->
+        <!--android:text="1 欢迎使用手机防盗"/>-->
+    <include layout="@layout/title_bar"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

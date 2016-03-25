@@ -7,9 +7,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.nlte.phonesafe.Setup4Activity">
-    <TextView
-        style="@style/TitleBarStyle"
-        android:text="4 设置完成"/>
+    <!--<TextView-->
+        <!--style="@style/TitleBarStyle"-->
+        <!--android:text="4 设置完成"/>-->
+    <include layout="@layout/title_bar"/>
+
     <CheckBox
         android:id="@+id/protect_cb"
         android:layout_width="match_parent"
@@ -55,7 +57,7 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:text="设置完成"
-            android:onClick="setupfinish"
+            android:onClick="next"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
             android:layout_marginRight="10dp"

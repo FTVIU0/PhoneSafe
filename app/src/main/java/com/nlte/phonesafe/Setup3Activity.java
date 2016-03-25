@@ -14,7 +14,7 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import com.nlte.phonesafe.utils.CacheUtil;
 import com.nlte.phonesafe.utils.ToastUtil;
 
-public class Setup3Activity extends AppCompatActivity {
+public class Setup3Activity extends BaseSetupActivity {
     @ViewInject(R.id.safe_num_et)
     private EditText safeNumEt;//安全号码编辑框
     @ViewInject(R.id.select_contact_btn)
@@ -23,12 +23,14 @@ public class Setup3Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup3);
+        setTitle("3 设置安全号码");
         ViewUtils.inject(this);
         //设置安全号码的初始化
         safeNumEt.setText(CacheUtil.getString(this, CacheUtil.SAFE_NUM));
     }
     //下一步， 把用户设置的安全号码进行保存或者更新
-    public void next(View view){
+    @Override
+    public void nextActivity() {
         if (TextUtils.isEmpty(safeNumEt.getText().toString().trim())){
             ToastUtil.show(this, "安全号码没设置");
         }else {//设置了安全号码
@@ -40,13 +42,16 @@ public class Setup3Activity extends AppCompatActivity {
         finish();//销毁当前Activity
         overridePendingTransition(R.anim.next_enter, R.anim.next_exit);
     }
+
     //上一步
-    public void pre(View view){
+    @Override
+    public void preActivity() {
         Intent intent = new Intent(this, Setup2Activity.class);
         startActivity(intent);
         finish();//销毁当前Activity
         overridePendingTransition(R.anim.pre_enter, R.anim.pre_exit);
     }
+
     //选择联系人
     public void selectContact(View view){
         ToastUtil.show(this, "选择联系人");

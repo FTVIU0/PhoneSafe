@@ -13,7 +13,7 @@ import com.lidroid.xutils.view.annotation.event.OnCompoundButtonCheckedChange;
 import com.nlte.phonesafe.utils.CacheUtil;
 import com.nlte.phonesafe.utils.ToastUtil;
 
-public class Setup4Activity extends AppCompatActivity {
+public class Setup4Activity extends BaseSetupActivity {
     @ViewInject(R.id.protect_cb)
     private CheckBox protectCb;//复选控件，实现手机防盗的开启和关闭
     //绑定状态改变监听
@@ -29,6 +29,7 @@ public class Setup4Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup4);
+        setTitle("4 设置完成");
         ViewUtils.inject(this);
 
         //初始化CHeckBox
@@ -39,14 +40,16 @@ public class Setup4Activity extends AppCompatActivity {
         }
     }
     //设置完成
-    public void setupfinish(View view){
+    @Override
+    public void nextActivity() {
         ToastUtil.show(this, "设置完成");
         //保存设置完成
         CacheUtil.putBoolean(this, CacheUtil.PROTECT_SETTING, true);
         finish();
     }
     //上一步
-    public void pre(View view){
+    @Override
+    public void preActivity() {
         Intent intent = new Intent(this, Setup3Activity.class);
         startActivity(intent);
         finish();//销毁当前Activity

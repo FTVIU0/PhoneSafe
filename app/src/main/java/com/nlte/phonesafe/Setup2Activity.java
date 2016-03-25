@@ -23,7 +23,7 @@ import com.nlte.phonesafe.utils.CacheUtil;
 import com.nlte.phonesafe.utils.ToastUtil;
 import com.nlte.phonesafe.view.SettingView;
 
-public class Setup2Activity extends AppCompatActivity {
+public class Setup2Activity extends BaseSetupActivity {
     private Context context;
     private static final int READ_PHONE_STATE = 123;//获取手机串号请求码
     // 1.注解式声明 ，取代用findViewById来引用
@@ -35,6 +35,7 @@ public class Setup2Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup2);
+        setTitle("2 手机卡绑定");
        /* 采用Xutil框架的viewUtils 模块实现 控件的注入
        首先要引入当前Activiyt关联的布局的控件对象 ，再注入到已经声明注解的控件中
          该方法要在setContentView(R.layout.activity_setup2)之后，即布局的控件先实例化为对象，再注入
@@ -77,18 +78,21 @@ public class Setup2Activity extends AppCompatActivity {
         return simSerialNumber;
     }
     //下一步， 要求必须绑定SIM卡才能指向
-    public void next(View view){
+    @Override
+    public void nextActivity() {
         if (bindSV.getChecked()){
-        Intent intent = new Intent(this, Setup3Activity.class);
-        startActivity(intent);
-        finish();//销毁当前Activity
-        overridePendingTransition(R.anim.next_enter, R.anim.next_exit);
+            Intent intent = new Intent(this, Setup3Activity.class);
+            startActivity(intent);
+            finish();//销毁当前Activity
+            overridePendingTransition(R.anim.next_enter, R.anim.next_exit);
         }else {
             ToastUtil.show(Setup2Activity.this, "请先绑定SIM卡");
         }
     }
+
     //上一步
-    public void pre(View view){
+    @Override
+    public void preActivity() {
         Intent intent = new Intent(this, Setup1Activity.class);
         startActivity(intent);
         finish();//销毁当前Activity
