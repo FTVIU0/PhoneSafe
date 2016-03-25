@@ -14,6 +14,7 @@ public class CacheUtil {
     public static final String IS_FIRST_USE = "is_first_use";//是否第一次使用
     public static String PROTECT_SETTING = "protect_setting";
     public static String SIM = "sim";//SIM卡串号
+    public static java.lang.String SAFE_NUM = null;//存放安全号码
 
     /*获取SharedPrefenence对象*/
     private static SharedPreferences getSPreference(Context context){
