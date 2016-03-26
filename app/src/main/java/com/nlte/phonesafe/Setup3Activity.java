@@ -11,14 +11,28 @@ import android.widget.EditText;
 
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
+import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.nlte.phonesafe.utils.CacheUtil;
 import com.nlte.phonesafe.utils.ToastUtil;
 
 public class Setup3Activity extends BaseSetupActivity {
     @ViewInject(R.id.safe_num_et)
     private EditText safeNumEt;//安全号码编辑框
-    @ViewInject(R.id.select_contact_btn)
-    private Button selectContactBtn;//选择联系人的按钮
+
+    @OnClick(R.id.select_contact_btn)
+    public void selectNum(View v){
+        Intent intent = new Intent(this, ContactActivity.class);
+        startActivityForResult(intent, 2);//2：代表请求码  要求有返回值
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (data!= null&&requestCode == 2){
+            //设置安全号码
+            safeNumEt.setText(data.getStringExtra("num"));
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +67,7 @@ public class Setup3Activity extends BaseSetupActivity {
     }
 
     //选择联系人
-    public void selectContact(View view){
-        ToastUtil.show(this, "选择联系人");
-    }
+//    public void selectContact(View view){
+//        ToastUtil.show(this, "选择联系人");
+//    }
 }

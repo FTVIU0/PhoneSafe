@@ -4,12 +4,14 @@
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <!--读取手机状态的权限-->
+    <!-- 读取手机状态的权限 -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-    <!--获取系统引导完成事件-->
+    <!-- 获取系统引导完成事件 -->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
-    <!--发短信的权限-->
+    <!-- 发短信的权限 -->
     <uses-permission android:name="android.permission.SEND_SMS"/>
+    <!-- 读联系人权限 -->
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
 
     <application
         android:allowBackup="true"
@@ -64,13 +66,17 @@
         <activity android:name=".Setup4Activity">
         </activity>
 
-        <!--注册广播接收器-->
+        <!-- 注册广播接收器 -->
         <receiver android:name=".receiver.BootCompliteReceiver">
-            <!--订阅手机系统引导完成事件-->
+
+            <!-- 订阅手机系统引导完成事件 -->
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>
         </receiver>
+
+        <activity android:name=".ContactActivity">
+        </activity>
     </application>
 
 </manifest>
