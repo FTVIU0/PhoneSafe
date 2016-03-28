@@ -17,6 +17,10 @@
     <!-- 读联系人权限 -->
     <uses-permission android:name="android.permission.READ_CONTACTS"/>
 
+    <!--获取定位权限-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+
 
     <application
         android:allowBackup="true"
@@ -82,10 +86,24 @@
         <activity android:name=".ContactActivity">
         </activity>
 
+        <!--注册服务-->
+        <service android:name=".service.GPSService"></service>
+
         <receiver android:name=".receiver.SmsReceiver">
             <intent-filter android:priority="1000">
                 <!--订阅广播事件类型-->
                 <action android:name="android.provider.Telephony.SMS_RECEIVED"/>
+            </intent-filter>
+        </receiver>
+        <!--元数据-->
+        <receiver android:name=".receiver.MyAdminReceiver"
+            android:label="@string/app_name"
+            android:description="@string/app_name"
+            android:permission="android.permission.BIND_DEVICE_ADMIN">
+            <meta-data android:name="android.app.device_admin"
+                android:resource="@xml/device_admin_sample" />
+            <intent-filter>
+                <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
             </intent-filter>
         </receiver>
     </application>
