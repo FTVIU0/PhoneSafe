@@ -10,8 +10,13 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <!-- 发短信的权限 -->
     <uses-permission android:name="android.permission.SEND_SMS"/>
+    <!--收短信的权限-->
+    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+    <!--读取短信信息的权限-->
+    <uses-permission android:name="android.permission.READ_SMS"/>
     <!-- 读联系人权限 -->
     <uses-permission android:name="android.permission.READ_CONTACTS"/>
+
 
     <application
         android:allowBackup="true"
@@ -68,7 +73,6 @@
 
         <!-- 注册广播接收器 -->
         <receiver android:name=".receiver.BootCompliteReceiver">
-
             <!-- 订阅手机系统引导完成事件 -->
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
@@ -77,6 +81,13 @@
 
         <activity android:name=".ContactActivity">
         </activity>
+
+        <receiver android:name=".receiver.SmsReceiver">
+            <intent-filter android:priority="1000">
+                <!--订阅广播事件类型-->
+                <action android:name="android.provider.Telephony.SMS_RECEIVED"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
