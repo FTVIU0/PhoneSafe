@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="通过绑定SIM卡：\n更换SIM卡发送报警短信"
+        android:textSize="18sp"/>
+    <com.nlte.phonesafe.view.SettingView
+        android:id="@+id/bind_sim_sv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:setting_title="SIM卡绑定"
+        app:setting_des_on="SIM卡已绑定"
+        app:setting_des_off="SIM卡未绑定" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/bind"
+            android:layout_centerInParent="true"/>
+    </RelativeLayout>
+
+</LinearLayout>
