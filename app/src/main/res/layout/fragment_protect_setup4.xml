@@ -27,7 +27,6 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:text="设置完成"
-            android:onClick="next"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
             android:layout_marginRight="10dp"

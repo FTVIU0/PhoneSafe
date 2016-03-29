@@ -27,7 +27,7 @@ public class ProtectFragment extends Fragment {
         //进入到设置片段
         ProtectSetupFragment protectSetupFragment = new ProtectSetupFragment();
         getFragmentManager().beginTransaction()
-                .replace(R.id.content, protectSetupFragment, "protectSetupFragment")
+                .replace(R.id.contentActivity, protectSetupFragment, "protectSetupFragment")
                 .commit();
     }
     private Context context;

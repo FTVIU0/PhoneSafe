@@ -71,7 +71,6 @@ public class Setup2Activity extends BaseSetupActivity {
 
 
     /*获取SIM卡串号*/
-
     private String getSIMSerialNum(){
         TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
         String simSerialNumber = telephonyManager.getSimSerialNumber();// 取得sim序列号
