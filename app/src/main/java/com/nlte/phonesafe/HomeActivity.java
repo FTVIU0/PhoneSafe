@@ -18,6 +18,8 @@ import com.nlte.phonesafe.utils.CacheUtil;
 import com.nlte.phonesafe.utils.MD5;
 import com.nlte.phonesafe.utils.ToastUtil;
 
+import java.io.File;
+
 public class HomeActivity extends AppCompatActivity {
     private Context context;
     private AlertDialog mDialog;
@@ -70,7 +72,9 @@ public class HomeActivity extends AppCompatActivity {
 
                         break;
                     case 7://高级工具
-
+                        intent.setClass(context, AdvanceToolsActivity.class);
+                        startActivity(intent);
+//                        finish();
                         break;
                     case 8://设置中心
                         intent.setClass(context, SettingActivity.class);
