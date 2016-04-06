@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.res.AssetManager;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
@@ -12,6 +13,7 @@ import android.os.SystemClock;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -28,6 +30,8 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -83,6 +87,37 @@ public class SplashActivity extends AppCompatActivity {
                     });
                 };
             }.start();
+        }
+        //把assets目录的adress.db 拷贝到手机本地
+        copyDB();
+    }
+    /*把assets目录的adress.db 拷贝到手机本地
+    * 步骤：
+    *   1.打开assets目录
+    *   2.获取输入流
+    *   3.在手机本地创建一个文件，开辟输出流，写入文件*/
+    private void copyDB() {
+        File file = new File(getFilesDir(), "address.db");
+        if (!file.exists()){//当文件存在时，不创建
+            //1.打开assets目录
+            AssetManager assetManger = getAssets();
+            try {
+                //2.获取文件的输入流
+                InputStream is = assetManger.open("address.db");
+                //3.在手机本地创建一个文件，开辟输出流，写入文件
+                FileOutputStream fos = new FileOutputStream(file);
+                int len = -1;
+                byte[] b = new byte[1024];
+                while ((len = is.read(b))!=-1){
+                    fos.write(b, 0, len);
+                }
+                //关闭流
+                fos.close();
+                is.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            Log.d("copyDB", "Success");
         }
     }
 
