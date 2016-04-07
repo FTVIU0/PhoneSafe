@@ -87,8 +87,8 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
         //开启手机吗、号码归属地查询服务
-        Intent intent = new Intent(this, AddressService.class);
-        startService(intent);
+        /*Intent intent = new Intent(this, AddressService.class);
+        startService(intent);*/
     }
     //显示输入密码对话框
     private void showAuthorDialog() {

@@ -28,5 +28,12 @@
         app:setting_title="软件锁"
         app:setting_des_on="软件锁开启"
         app:setting_des_off="软件锁关闭" />
+    <com.nlte.phonesafe.view.SettingView
+        android:id="@+id/address_sv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:setting_title="显示手机号码归属地"
+        app:setting_des_on="开启"
+        app:setting_des_off="关闭" />
 
 </LinearLayout>
