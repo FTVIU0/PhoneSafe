@@ -21,8 +21,8 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
-    <!--获取震动权限-->
-    <uses-permission android:name="android.permission.VIBRATE"/>
+    <!-- 获取震动权限 -->
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
@@ -35,11 +35,14 @@
         <activity
             android:name=".WelcomeActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-            <!--<intent-filter>
+
+            <!--
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
+            </intent-filter>
+            -->
         </activity>
         <activity
             android:name=".GuideActivity"
@@ -52,13 +55,11 @@
             android:name=".HomeActivity"
             android:launchMode="singleTask"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-             <intent-filter>
-             <action android:name="android.intent.action.MAIN"/>
-
-
-             <category android:name="android.intent.category.LAUNCHER"/>
-             </intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".SettingActivity"
@@ -102,7 +103,12 @@
         </receiver>
 
         <activity android:name=".AdvanceToolsActivity" />
-        <activity android:name=".AddressQueryActivity"></activity>
+        <activity android:name=".AddressQueryActivity" />
+
+        <service
+            android:name=".service.AddressService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>

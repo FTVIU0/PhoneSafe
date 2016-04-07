@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.GridView;
 
 import com.nlte.phonesafe.adapter.HomeAdapter;
+import com.nlte.phonesafe.service.AddressService;
 import com.nlte.phonesafe.utils.CacheUtil;
 import com.nlte.phonesafe.utils.MD5;
 import com.nlte.phonesafe.utils.ToastUtil;
@@ -85,6 +86,9 @@ public class HomeActivity extends AppCompatActivity {
                 }
             }
         });
+        //开启手机吗、号码归属地查询服务
+        Intent intent = new Intent(this, AddressService.class);
+        startService(intent);
     }
     //显示输入密码对话框
     private void showAuthorDialog() {
