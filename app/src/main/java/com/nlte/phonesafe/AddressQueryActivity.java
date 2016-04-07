@@ -1,6 +1,7 @@
 package com.nlte.phonesafe;
 
 import android.content.Context;
+import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import com.lidroid.xutils.ViewUtils;
@@ -67,6 +68,17 @@ public class AddressQueryActivity extends AppCompatActivity {
                         locationTv.setText(location);
                     }
                 }
+                //实现震动效果， 通过系统服务来获取震动对象
+                Vibrator vibrator = (Vibrator) context.getSystemService(VIBRATOR_SERVICE);
+                vibrator.vibrate(10000);//震动持续时间
+                /*以某种频率实现震动
+                 * pattern：震动的采样
+                 * repeat:
+                 *   当值为-1  ，表示  不重复
+                 *   当大于0的整数 ，则按数组的下标开始重复
+                 */
+                //vibrator.vibrate(new long[]{500, 300, 100, 200}, -1);
+                vibrator.cancel();//停止震动
             }
         });
     }
