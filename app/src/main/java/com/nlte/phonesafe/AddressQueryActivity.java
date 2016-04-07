@@ -9,6 +9,8 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -56,9 +58,14 @@ public class AddressQueryActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String num  = inputNumEt.getText().toString().trim();
-                String location = AddressDao.queryAdress(context, num);
-                if (!TextUtils.isEmpty(num)){
-                    locationTv.setText(location);
+                if (TextUtils.isEmpty(num)){
+                    Animation shake = AnimationUtils.loadAnimation(context, R.anim.shake);
+                    inputNumEt.startAnimation(shake);
+                }else{
+                    String location = AddressDao.queryAdress(context, num);
+                    if (!TextUtils.isEmpty(num)){
+                        locationTv.setText(location);
+                    }
                 }
             }
         });
