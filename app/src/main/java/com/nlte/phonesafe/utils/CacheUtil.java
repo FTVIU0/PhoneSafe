@@ -16,6 +16,7 @@ public class CacheUtil {
     public static String SIM = "sim";//SIM卡串号
     public static java.lang.String SAFE_NUM = null;//存放安全号码
     public static String IS_PROTECT = "is_protect";//是否开启手机防盗功能
+    public static final String LOCATION_STYLE = "location_style";//存放归属地提示框的风格
 
     /*获取SharedPrefenence对象*/
     private static SharedPreferences getSPreference(Context context){
@@ -43,6 +44,8 @@ public class CacheUtil {
         SharedPreferences sp = getSPreference(context);
         return sp.getString(key, defValue);//返回传递过来的值
     }
+
+
     /*取boolean数据 默认返回false*/
     public static boolean getBoolean(Context context, String key){
         SharedPreferences sp = getSPreference(context);
@@ -51,5 +54,21 @@ public class CacheUtil {
     public static boolean getBoolean(Context context, String key, boolean defValue){
         SharedPreferences sp = getSPreference(context);
         return sp.getBoolean(key, defValue);//返回传递过来的值
+    }
+    // 存整数
+    public static void putInt(Context context,String key, int value) {
+        SharedPreferences sp=getSPreference(context);
+        sp.edit().putInt(key, value).commit();
+    }
+
+    // 取字符串数据 ,默认返回的是 0
+    public static int getInt(Context context,String key) {
+        SharedPreferences sp=getSPreference(context);
+        return sp.getInt(key, 0);
+    }
+    // 取整数 ,默认的是传递过来的值
+    public static int getInt(Context context,String key,int defvalue) {
+        SharedPreferences sp=getSPreference(context);
+        return sp.getInt(key, defvalue);
     }
 }

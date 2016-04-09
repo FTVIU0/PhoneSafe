@@ -5,5 +5,10 @@
     <color name="colorAccent">#FF4081</color>
     <color name="purple">#302c33</color>
     <color name="blue">#0000ff</color>
+    <color name="red">#dd2e13</color>
+    <color name="gray">#b1a3a1</color>
+    <color name="organge">#f5f236</color>
+    <color name="green">#3da740</color>
+    <color name="white">#bdffffff</color>
 
 </resources>

@@ -36,4 +36,12 @@
         app:setting_des_on="开启"
         app:setting_des_off="关闭" />
 
+    <com.nlte.phonesafe.view.SettingStyleView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/locationStyle_ssv"
+        app:setting_title="归属地提示框风格"
+        app:setting_des_on="卫士蓝">
+    </com.nlte.phonesafe.view.SettingStyleView>
+
 </LinearLayout>

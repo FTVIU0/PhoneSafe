@@ -16,4 +16,9 @@ public class AdvanceToolsActivity extends AppCompatActivity {
         Intent intent = new Intent(AdvanceToolsActivity.this, AddressQueryActivity.class);
         startActivity(intent);
     }
+    public void rocket(View view){
+        Intent intent = new Intent(AdvanceToolsActivity.this, RocketActivity.class);
+        startActivity(intent);
+    }
+
 }
