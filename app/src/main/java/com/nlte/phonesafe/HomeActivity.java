@@ -55,7 +55,8 @@ public class HomeActivity extends AppCompatActivity {
                         }
                         break;
                     case 1://通信卫士
-
+                        intent.setClass(context, CallAndSMSActivity.class);
+                        startActivity(intent);
                         break;
                     case 2://软件管理
 

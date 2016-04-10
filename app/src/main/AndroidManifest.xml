@@ -110,7 +110,8 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".RocketActivity"></activity>
+        <activity android:name=".RocketActivity" />
+        <activity android:name=".CallAndSMSActivity"></activity>
     </application>
 
 </manifest>
