@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.SystemClock;
 
 import com.nlte.phonesafe.db.BlackNumOpenHelper;
 import com.nlte.phonesafe.entity.BlackNuminfo;
@@ -77,6 +78,7 @@ public class BlackNumDao {
 
     //查询所有的黑名单
     public List<BlackNuminfo> getAllBlackNums() {
+        SystemClock.sleep(3000);//休眠3秒，模拟延时加载
         List<BlackNuminfo> data = null;
         SQLiteDatabase db = helper.getReadableDatabase();//没有加锁，速度较快
         Cursor cursor = db.query(TABLE, new String[]{NUM, MODE}, null, null, null, null, null);
