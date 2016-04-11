@@ -78,10 +78,30 @@ public class BlackNumDao {
 
     //查询所有的黑名单
     public List<BlackNuminfo> getAllBlackNums() {
-        SystemClock.sleep(2000);//休眠3秒，模拟延时加载
+        SystemClock.sleep(500);//休眠3秒，模拟延时加载
         List<BlackNuminfo> data = null;
         SQLiteDatabase db = helper.getReadableDatabase();//没有加锁，速度较快
         Cursor cursor = db.query(TABLE, new String[]{NUM, MODE}, null, null, null, null, null);
+        if (cursor.getCount()>0){
+            data = new ArrayList<BlackNuminfo>();
+        }
+        while (cursor.moveToNext()){
+            String num = cursor.getString(0);
+            int mode = cursor.getInt(1);
+            BlackNuminfo blackNuminfo = new BlackNuminfo(num, mode);
+            data.add(blackNuminfo);
+        }
+        cursor.close();
+        db.close();
+        return data;
+    }
+    //查询部分的黑名单
+    public List<BlackNuminfo> getPartBlackNums(int limit, int offset) {
+        SystemClock.sleep(500);//休眠3秒，模拟延时加载
+        List<BlackNuminfo> data = null;
+        SQLiteDatabase db = helper.getReadableDatabase();//没有加锁，速度较快
+//        Cursor cursor = db.query(TABLE, new String[]{NUM, MODE}, null, null, null, null, null);
+        Cursor cursor = db.query(TABLE, new String[]{NUM, MODE}, null, null, null, null, null, offset+","+limit);
         if (cursor.getCount()>0){
             data = new ArrayList<BlackNuminfo>();
         }

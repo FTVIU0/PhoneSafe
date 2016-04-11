@@ -91,6 +91,9 @@ public class BlackNumAdapter extends BaseAdapter {
         return convertView;
     }
 
+    public void setData(List<BlackNuminfo> data){
+        this.mData = data;
+    }
     //用HodlerView来引用要操作的控件 取代findViewById
     private static class HolderView{
         TextView numTv;
