@@ -65,7 +65,6 @@ public class HomeActivity extends AppCompatActivity {
 
                         break;
                     case 4://流量统计
-
                         break;
                     case 5://手机杀毒
 

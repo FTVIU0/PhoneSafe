@@ -78,7 +78,7 @@ public class BlackNumDao {
 
     //查询所有的黑名单
     public List<BlackNuminfo> getAllBlackNums() {
-        SystemClock.sleep(3000);//休眠3秒，模拟延时加载
+        SystemClock.sleep(2000);//休眠3秒，模拟延时加载
         List<BlackNuminfo> data = null;
         SQLiteDatabase db = helper.getReadableDatabase();//没有加锁，速度较快
         Cursor cursor = db.query(TABLE, new String[]{NUM, MODE}, null, null, null, null, null);

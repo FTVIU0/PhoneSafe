@@ -2,12 +2,19 @@ package com.nlte.phonesafe;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.lidroid.xutils.ViewUtils;
@@ -15,7 +22,9 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import com.nlte.phonesafe.adapter.BlackNumAdapter;
 import com.nlte.phonesafe.db.dao.BlackNumDao;
 import com.nlte.phonesafe.entity.BlackNuminfo;
+import com.nlte.phonesafe.utils.Constants;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CallAndSMSActivity extends AppCompatActivity {
@@ -31,6 +40,8 @@ public class CallAndSMSActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_call_and_sms);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         context = this;
         ViewUtils.inject(this);
         fillData();
@@ -61,9 +72,73 @@ public class CallAndSMSActivity extends AppCompatActivity {
                 if (adapter == null){
                     adapter = new BlackNumAdapter(context, mData);
                     blackNumLstView.setAdapter(adapter);
+                }else {
+                    adapter.notifyDataSetChanged();//通知数据集发生改变
                 }
             }
         }.execute();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.setting, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.action_settings:
+                showAddDialog();
+                break;
+            default:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    //展示添黑名单对话框
+    private void showAddDialog() {
+        View view = getLayoutInflater().inflate(R.layout.dialog_blacknum_add, null);
+        final AlertDialog dialog = new AlertDialog.Builder(context)
+                .setView(view)
+                .create();
+        dialog.show();
+        final EditText blackNumEt = (EditText)view.findViewById(R.id.add_num_et);
+        Button addBtn = (Button)view.findViewById(R.id.add_btn);
+        Button cancelBtn = (Button)view.findViewById(R.id.cancel_btn);
+        final RadioGroup radioGroup = (RadioGroup)view.findViewById(R.id.mode_rg);
+        addBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int mode = -1;
+                String blackNum = blackNumEt.getText().toString().trim();
+                blackNumDao = new BlackNumDao(context);
+                int checkedRadioButtonId = radioGroup.getCheckedRadioButtonId();
+                switch (checkedRadioButtonId){
+                    case R.id.all_rb:
+                        mode = Constants.ALL;
+                        break;
+                    case R.id.call_rb:
+                        mode = Constants.CALL;
+                        break;
+                    case R.id.sms_rb:
+                        mode = Constants.SMS;
+                        break;
+                    default:
+                        break;
+                }
+                blackNumDao.add(blackNum, mode);
+                mData.add(new BlackNuminfo(blackNum, mode));
+                adapter.notifyDataSetChanged();
+                dialog.dismiss();
+            }
+        });
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+    }
 }

@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.nlte.phonesafe.R;
 import com.nlte.phonesafe.db.dao.BlackNumDao;
 import com.nlte.phonesafe.entity.BlackNuminfo;
+import com.nlte.phonesafe.utils.ToastUtil;
 
 import java.util.List;
 import java.util.zip.GZIPOutputStream;
@@ -42,11 +43,10 @@ public class BlackNumAdapter extends BaseAdapter {
     public long getItemId(int position) {
         return position;
     }
-
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         //设置列表项   装配数据
-        BlackNuminfo blackNuminfo = mData.get(position);
+        final BlackNuminfo blackNuminfo = mData.get(position);
         HolderView holderView = null;
         if (convertView == null){
             holderView = new HolderView();
@@ -76,6 +76,18 @@ public class BlackNumAdapter extends BaseAdapter {
             default:
                 break;
         }
+        holderView.deleteIv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                blackNumDao = new BlackNumDao(context);
+                //获取要删除的黑名单的号码
+                System.out.println(blackNuminfo.getNum());
+                String num = blackNuminfo.getNum();
+                blackNumDao.delete(num);//向数据库删除
+                mData.remove(blackNuminfo);
+                notifyDataSetChanged();
+            }
+        });
         return convertView;
     }
 

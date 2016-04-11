@@ -21,12 +21,12 @@ public class MyTest extends AndroidTestCase {
         BlackNumDao blackNumDao=new BlackNumDao(getContext());
         //用随机数来初始化拦截模式
         Random random=new Random();
-        for(int i=0;i<30;i++){
+        for(int i=0;i<40;i++){
             blackNumDao.add((1325678986+6*i)+""+9, random.nextInt(3));//in the half-open range [0, n).
         }
     }
     public void testDelete(){
         BlackNumDao blackNumDao=new BlackNumDao(getContext());
-        blackNumDao.delete("13256789869");//in the half-open range [0, n).
+        blackNumDao.delete("13256789929");//in the half-open range [0, n).
     }
 }

@@ -5,5 +5,7 @@ package com.nlte.phonesafe.utils;
  */
 public class Constants {
     public static final String SERVER_VERSION_URL = "http://10.0.2.2:8080/updateInfo.json";
-
+    public static final int CALL = 0;
+    public static final int SMS = 1;
+    public static final int ALL = 2;
 }
