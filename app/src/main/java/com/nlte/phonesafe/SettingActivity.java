@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.nlte.phonesafe.service.AddressService;
+import com.nlte.phonesafe.service.BlackNumService;
 import com.nlte.phonesafe.utils.CacheUtil;
 import com.nlte.phonesafe.utils.ServiceUtil;
 import com.nlte.phonesafe.view.SettingStyleView;
@@ -21,6 +22,7 @@ public class SettingActivity extends AppCompatActivity {
     private SettingView mSoftLockSv;
     private SettingView mAddressSv;
     private SettingStyleView mLocationStyleSsv;
+    private SettingView mBlackNumSV;
     private String[] styleItems = {"卫士蓝","金属灰","活力橙","苹果绿","半透明"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +32,7 @@ public class SettingActivity extends AppCompatActivity {
         mUpdateSv = (SettingView)findViewById(R.id.update_sv);
         mSoftLockSv = (SettingView)findViewById(R.id.soft_sv);
         mAddressSv = (SettingView)findViewById(R.id.address_sv);
+        mBlackNumSV = (SettingView)findViewById(R.id.black_num_sv);
         mLocationStyleSsv = (SettingStyleView)findViewById(R.id.locationStyle_ssv);
         //设置自动升级自定义点击监听事件 每一次点击切换复选状态
         mUpdateSv.setOnClickListener(new View.OnClickListener() {
@@ -107,6 +110,20 @@ public class SettingActivity extends AppCompatActivity {
                 alertDialog.show();
             }
         });
+        //黑名单拦截点击事件
+        mBlackNumSV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, BlackNumService.class);
+                if (mBlackNumSV.getChecked()){
+                    stopService(intent);
+                    mBlackNumSV.setChecked(false);
+                }else {
+                    startService(intent);
+                    mBlackNumSV.setChecked(true);
+                }
+            }
+        });
     }
 
     @Override
@@ -117,6 +134,13 @@ public class SettingActivity extends AppCompatActivity {
             mAddressSv.setChecked(true);
         }else {
             mAddressSv.setChecked(false);
+        }
+        //获取黑名单服务的状态
+        boolean BlackNumserviceStatus = ServiceUtil.isServiceRunning(context, "com.nlte.phonesafe.service.BlackNumService");
+        if (serviceStatus){
+            mBlackNumSV.setChecked(true);
+        }else {
+            mBlackNumSV.setChecked(false);
         }
         super.onStart();
     }

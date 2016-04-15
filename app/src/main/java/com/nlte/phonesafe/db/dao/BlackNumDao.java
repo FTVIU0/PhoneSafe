@@ -56,9 +56,9 @@ public class BlackNumDao {
     }
     //查询某个黑名单的拦截方式
     public int queryBlackNumMode(String num){
-        int mode = -1;
+        int mode = -2;
         SQLiteDatabase db = helper.getReadableDatabase();//没有加锁，速度较快
-        Cursor cursor = db.query(TABLE, new String[]{MODE}, NUM+"=?", new String[]{NUM}, null, null, null);
+        Cursor cursor = db.query(TABLE, new String[]{MODE}, NUM+"=?", new String[]{num}, null, null, null);
         if (cursor.moveToNext()){
             mode = cursor.getInt(cursor.getColumnIndex(MODE));
         }

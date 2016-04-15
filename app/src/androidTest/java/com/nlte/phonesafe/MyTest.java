@@ -5,7 +5,6 @@ import android.util.Log;
 
 import com.nlte.phonesafe.db.dao.AddressDao;
 import com.nlte.phonesafe.db.dao.BlackNumDao;
-import com.nlte.phonesafe.utils.ToastUtil;
 
 import java.util.Random;
 
@@ -28,5 +27,11 @@ public class MyTest extends AndroidTestCase {
     public void testDelete(){
         BlackNumDao blackNumDao=new BlackNumDao(getContext());
         blackNumDao.delete("13256789929");//in the half-open range [0, n).
+    }
+    public void testqueryBlackNumMode(){
+        BlackNumDao blackNumDao=new BlackNumDao(getContext());
+        int mode = blackNumDao.queryBlackNumMode("13256790169");//in the half-open range [0, n).
+        assertEquals(1, mode);
+        System.out.println(mode);
     }
 }

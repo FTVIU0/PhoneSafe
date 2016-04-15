@@ -2,9 +2,9 @@ package com.nlte.phonesafe;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -14,12 +14,9 @@ import android.widget.EditText;
 import android.widget.GridView;
 
 import com.nlte.phonesafe.adapter.HomeAdapter;
-import com.nlte.phonesafe.service.AddressService;
 import com.nlte.phonesafe.utils.CacheUtil;
 import com.nlte.phonesafe.utils.MD5;
 import com.nlte.phonesafe.utils.ToastUtil;
-
-import java.io.File;
 
 public class HomeActivity extends AppCompatActivity {
     private Context context;
@@ -59,7 +56,8 @@ public class HomeActivity extends AppCompatActivity {
                         startActivity(intent);
                         break;
                     case 2://软件管理
-
+                        intent.setClass(context, SoftManagerActivity.class);
+                        startActivity(intent);
                         break;
                     case 3://进程管理
 

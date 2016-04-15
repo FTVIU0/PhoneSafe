@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+                android:gravity="center_vertical"
+                android:background="#7c837777" >
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/icon_iv"
+        android:layout_marginLeft="10dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:src="@android:drawable/ic_lock_idle_alarm"/>
+    <TextView
+        android:id="@+id/soft_name_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@id/icon_iv"
+        android:text="应用名称"/>
+    <TextView
+        android:id="@+id/is_sdcard_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@id/icon_iv"
+        android:layout_below="@id/soft_name_tv"
+        android:text="手机内存"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1.4"
+        android:id="@+id/version_name_tv"
+        android:layout_alignTop="@+id/is_sdcard_tv"
+        android:layout_centerHorizontal="true"/>
+
+</RelativeLayout>

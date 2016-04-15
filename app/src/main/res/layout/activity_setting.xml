@@ -29,6 +29,13 @@
         app:setting_des_on="软件锁开启"
         app:setting_des_off="软件锁关闭" />
     <com.nlte.phonesafe.view.SettingView
+        android:id="@+id/black_num_sv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:setting_title="黑名单拦截"
+        app:setting_des_on="开启"
+        app:setting_des_off="关闭" />
+    <com.nlte.phonesafe.view.SettingView
         android:id="@+id/address_sv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -37,9 +44,9 @@
         app:setting_des_off="关闭" />
 
     <com.nlte.phonesafe.view.SettingStyleView
+        android:id="@+id/locationStyle_ssv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/locationStyle_ssv"
         app:setting_title="归属地提示框风格"
         app:setting_des_on="卫士蓝">
     </com.nlte.phonesafe.view.SettingStyleView>
