@@ -2,6 +2,7 @@ package com.nlte.phonesafe;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -200,8 +201,8 @@ public class SoftManagerActivity extends AppCompatActivity implements View.OnCli
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.install_tv:
-
+            case R.id.run_tv:
+                startAPK();
                 break;
             case R.id.unstall_tv:
                 uninstallAPK();
@@ -214,6 +215,18 @@ public class SoftManagerActivity extends AppCompatActivity implements View.OnCli
                 break;
             default:
                 break;
+        }
+    }
+
+    /*启动应用
+    * 通过包管理器获取某个包的启动入口MAIN, 再执行该意图*/
+    private void startAPK() {
+        PackageManager pm = getPackageManager();
+        Intent intent = pm.getLaunchIntentForPackage(softInfo.getPackageName());
+        if (intent!=null){//当运行的意图为空，则不执行，应有有些服务不能在界面上启动，且权限不够
+            startActivity(intent);
+        }else {
+            ToastUtil.show(mContext, "不可启动");
         }
     }
 

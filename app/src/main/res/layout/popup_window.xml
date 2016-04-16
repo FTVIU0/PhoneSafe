@@ -7,10 +7,10 @@
               android:layout_height="80dp">
 
     <TextView
-        android:id="@+id/install_tv"
+        android:id="@+id/run_tv"
         style="@style/MyPopupWindowstyle"
         android:drawableTop="@drawable/ic_intstall"
-        android:text="安装"/>
+        android:text="启动"/>
     <TextView
         android:id="@+id/unstall_tv"
         style="@style/MyPopupWindowstyle"
