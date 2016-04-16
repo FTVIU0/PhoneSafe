@@ -2,6 +2,7 @@ package com.nlte.phonesafe;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +13,7 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -31,20 +33,23 @@ public class SoftManagerActivity extends AppCompatActivity {
     private List<SoftInfo> userSoftInfo;//用户程序列表
     private List<SoftInfo> systemSoftInfo;//系统程序列表
     private SoftManagerAdapter adapter;//适配器
+    private PopupWindow mPopupWindow;//弹窗
+    private LinearLayout mPwView;//弹窗的界面视图
 
-    @ViewInject(R.id.soft_lv)
-    private ListView mSoftManagerLv;//软件Info管理的ListView
-    @ViewInject(R.id.count_tv)
-    private TextView countTv;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_soft_manager);
-        ViewUtils.inject(this);
-        mContext = this;
-        mSoftManager = new SoftManager(mContext);
-        userSoftInfo = new ArrayList<SoftInfo>();
-        systemSoftInfo = new ArrayList<SoftInfo>();
+        @ViewInject(R.id.soft_lv)
+        private ListView mSoftManagerLv;//软件Info管理的ListView
+        @ViewInject(R.id.count_tv)
+        private TextView countTv;
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_soft_manager);
+            ViewUtils.inject(this);
+            mContext = this;
+            mSoftManager = new SoftManager(mContext);
+            userSoftInfo = new ArrayList<SoftInfo>();
+            systemSoftInfo = new ArrayList<SoftInfo>();
+            initPopupWindows();
         //填充数据
         fillData();
         //设置listview滚动监听
@@ -56,6 +61,7 @@ public class SoftManagerActivity extends AppCompatActivity {
 
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                hidePopupWindows();
                 if (firstVisibleItem <= userSoftInfo.size()){
                     countTv.setText("用户程序("+userSoftInfo.size()+")");
                 }else {
@@ -71,21 +77,44 @@ public class SoftManagerActivity extends AppCompatActivity {
                 if (position==0||position==userSoftInfo.size()+1){
                     return;
                 }
+                //消失弹窗
+                //hidePopupWindows();
                 /**弹窗显示信息
                  * contentView: 对话框内容视图
                  */
-                View view1 = View.inflate(mContext, R.layout.popup_window, null);
-                PopupWindow popupWindow = new PopupWindow(
-                        view1,
+                mPopupWindow = new PopupWindow(
+                        mPwView,
                         ViewGroup.LayoutParams.WRAP_CONTENT, //要显示的宽度
                         ViewGroup.LayoutParams.WRAP_CONTENT);//要显示的高度
+
+                // 默认弹窗没有背景，假如要实现弹创消失获者实现动画效果，则需要设置背景
+                mPopupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));//背景透明
+                mPopupWindow.setFocusable(true);//设置获取焦点。即有弹窗显示，则获取焦点，失去焦点，则弹窗消失
+                mPopupWindow.update();//焦点更新
+
                 /*
                 * 以下坠的方式显示弹窗
+                * 即在View位置为锚点向下坠
                 * anchor：锚点*/
-                popupWindow.showAsDropDown(view);
+                mPopupWindow.showAsDropDown(view, 50, -view.getHeight());
             }
         });
 
+    }
+
+    //弹窗消失
+    private void hidePopupWindows() {
+        if (mPopupWindow!=null){
+            mPopupWindow.dismiss();
+            mPopupWindow =null;
+        }
+    }
+
+
+    /*初始化弹窗试图*/
+    private void initPopupWindows() {
+        //1，初始化弹窗视图
+        mPwView = (LinearLayout) View.inflate(mContext, R.layout.popup_window, null);
     }
 
     //数据
@@ -183,5 +212,11 @@ public class SoftManagerActivity extends AppCompatActivity {
             }
             return convertView;
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        hidePopupWindows();
+        super.onDestroy();
     }
 }

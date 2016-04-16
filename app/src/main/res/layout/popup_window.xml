@@ -3,8 +3,8 @@
               android:orientation="horizontal"
               android:layout_width="match_parent"
               android:gravity="center"
-              android:background="@drawable/ticket_btn_cancel_normal"
-              android:layout_height="wrap_content">
+              android:background="@drawable/local_popup_bg"
+              android:layout_height="80dp">
 
     <TextView
         android:layout_width="0dp"
@@ -37,5 +37,5 @@
         android:gravity="center"
         android:padding="10dp"
         android:drawableTop="@drawable/ic_settings_black"
-        android:text="设置"/>
+        android:text="详细"/>
 </LinearLayout>
