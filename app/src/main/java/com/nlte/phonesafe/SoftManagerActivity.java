@@ -1,14 +1,17 @@
 package com.nlte.phonesafe;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationSet;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
@@ -22,11 +25,12 @@ import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.nlte.phonesafe.business.SoftManager;
 import com.nlte.phonesafe.entity.SoftInfo;
+import com.nlte.phonesafe.utils.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SoftManagerActivity extends AppCompatActivity {
+public class SoftManagerActivity extends AppCompatActivity implements View.OnClickListener{
     private Context mContext;
     private SoftManager mSoftManager;//软件管理业务类
     private List<SoftInfo> mdata;//数据集
@@ -35,21 +39,24 @@ public class SoftManagerActivity extends AppCompatActivity {
     private SoftManagerAdapter adapter;//适配器
     private PopupWindow mPopupWindow;//弹窗
     private LinearLayout mPwView;//弹窗的界面视图
+    private AnimationSet mAnimationSet;//动画集合
+    private SoftInfo softInfo;
 
-        @ViewInject(R.id.soft_lv)
-        private ListView mSoftManagerLv;//软件Info管理的ListView
-        @ViewInject(R.id.count_tv)
-        private TextView countTv;
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_soft_manager);
-            ViewUtils.inject(this);
-            mContext = this;
-            mSoftManager = new SoftManager(mContext);
-            userSoftInfo = new ArrayList<SoftInfo>();
-            systemSoftInfo = new ArrayList<SoftInfo>();
-            initPopupWindows();
+    @ViewInject(R.id.soft_lv)
+    private ListView mSoftManagerLv;//软件Info管理的ListView
+    @ViewInject(R.id.count_tv)
+    private TextView countTv;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_soft_manager);
+        ViewUtils.inject(this);
+        mContext = this;
+        mSoftManager = new SoftManager(mContext);
+        userSoftInfo = new ArrayList<SoftInfo>();
+        systemSoftInfo = new ArrayList<SoftInfo>();
+        initPopupWindows();
         //填充数据
         fillData();
         //设置listview滚动监听
@@ -62,10 +69,10 @@ public class SoftManagerActivity extends AppCompatActivity {
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
                 hidePopupWindows();
-                if (firstVisibleItem <= userSoftInfo.size()){
-                    countTv.setText("用户程序("+userSoftInfo.size()+")");
-                }else {
-                    countTv.setText("系统程序("+systemSoftInfo.size()+")");
+                if (firstVisibleItem <= userSoftInfo.size()) {
+                    countTv.setText("用户程序(" + userSoftInfo.size() + ")");
+                } else {
+                    countTv.setText("系统程序(" + systemSoftInfo.size() + ")");
                 }
             }
         });
@@ -74,8 +81,13 @@ public class SoftManagerActivity extends AppCompatActivity {
         mSoftManagerLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (position==0||position==userSoftInfo.size()+1){
+                if (position == 0 || position == userSoftInfo.size() + 1) {
                     return;
+                }
+                if (position<=userSoftInfo.size()){
+                    softInfo = userSoftInfo.get(position-1);
+                }else {
+                    softInfo = systemSoftInfo.get(position-userSoftInfo.size()-2);
                 }
                 //消失弹窗
                 //hidePopupWindows();
@@ -90,13 +102,15 @@ public class SoftManagerActivity extends AppCompatActivity {
                 // 默认弹窗没有背景，假如要实现弹创消失获者实现动画效果，则需要设置背景
                 mPopupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));//背景透明
                 mPopupWindow.setFocusable(true);//设置获取焦点。即有弹窗显示，则获取焦点，失去焦点，则弹窗消失
-                mPopupWindow.update();//焦点更新
+                //mPopupWindow.update();//焦点更新
 
                 /*
                 * 以下坠的方式显示弹窗
                 * 即在View位置为锚点向下坠
                 * anchor：锚点*/
                 mPopupWindow.showAsDropDown(view, 50, -view.getHeight());
+                //执行动画
+                //mPwView.startAnimation(mAnimationSet);
             }
         });
 
@@ -104,9 +118,9 @@ public class SoftManagerActivity extends AppCompatActivity {
 
     //弹窗消失
     private void hidePopupWindows() {
-        if (mPopupWindow!=null){
+        if (mPopupWindow != null) {
             mPopupWindow.dismiss();
-            mPopupWindow =null;
+            mPopupWindow = null;
         }
     }
 
@@ -115,19 +129,49 @@ public class SoftManagerActivity extends AppCompatActivity {
     private void initPopupWindows() {
         //1，初始化弹窗视图
         mPwView = (LinearLayout) View.inflate(mContext, R.layout.popup_window, null);
+        /*//2.弹窗界面的动画设置
+        mAnimationSet = new AnimationSet(true);//是否共享特效
+        //缩放动画
+        ScaleAnimation scaleAnimation = new ScaleAnimation(
+                0, 1,
+                0, 1,
+                Animation.ABSOLUTE, 0,
+                Animation.RELATIVE_TO_SELF, 0.5f
+        );
+        scaleAnimation.setDuration(5000);
+        scaleAnimation.setFillAfter(true);
+        //scaleAnimation.setInterpolator(new BounceInterpolator());//弹簧效果
+
+        //透明度变化动画
+        *//*AlphaAnimation alphaAnimation = new AlphaAnimation(0.2f, 1);
+        alphaAnimation.setDuration(2000);
+        alphaAnimation.setFillAfter(true);
+        scaleAnimation.setInterpolator(new BounceInterpolator());//弹簧效果*//*
+
+        //添加动画到集合中
+        mAnimationSet.addAnimation(scaleAnimation);
+        //mAnimationSet.addAnimation(alphaAnimation);*/
+        //初始化弹窗的点击监听事件，通过父控件来引用子控件
+        int childCount = mPwView.getChildCount();//获取子控件的个数
+        for (int i = 0; i<childCount; i++){
+            mPwView.getChildAt(i).setOnClickListener(this);//获取点击的控件
+        }
     }
 
     //数据
     private void fillData() {
-        new AsyncTask<String, Integer, String>(){
+        new AsyncTask<String, Integer, String>() {
             @Override
             protected String doInBackground(String... params) {
                 mdata = mSoftManager.getAllSofts();
+                //清除集合中的数据
+                userSoftInfo.clear();
+                systemSoftInfo.clear();
                 //遍历应用程序列表
-                for (SoftInfo info:mdata){
-                    if (info.isUser()){//判断是否为用户程序
+                for (SoftInfo info : mdata) {
+                    if (info.isUser()) {//判断是否为用户程序
                         userSoftInfo.add(info);
-                    }else {
+                    } else {
                         systemSoftInfo.add(info);
                     }
                 }
@@ -142,26 +186,71 @@ public class SoftManagerActivity extends AppCompatActivity {
             @Override
             protected void onPostExecute(String s) {
                 //LIstView适配数据
-                if (adapter == null){
+                if (adapter == null) {
                     adapter = new SoftManagerAdapter();
                     mSoftManagerLv.setAdapter(adapter);//设置适配器
-                }else {
+                } else {
                     adapter.notifyDataSetChanged();//通知数据发生改变
                 }
                 super.onPostExecute(s);
             }
         }.execute();
     }
-    private class SoftManagerAdapter extends BaseAdapter{
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.install_tv:
+
+                break;
+            case R.id.unstall_tv:
+                uninstallAPK();
+                break;
+            case R.id.share_tv:
+                ToastUtil.show(mContext, "share");
+                break;
+            case R.id.detail_tv:
+                ToastUtil.show(mContext, "detail");
+                break;
+            default:
+                break;
+        }
+    }
+
+    /*调用系统卸载器  卸载APK*/
+    private void uninstallAPK() {
+        if (getPackageName().equals(softInfo.getPackageName())){
+            ToastUtil.show(mContext, "你傻啊");
+        }else if (!softInfo.isUser()){
+            ToastUtil.show(mContext, "没有权限删除系统应用");
+        }else {
+            Intent intent = new Intent();
+            intent.setAction(Intent.ACTION_DELETE);
+            intent.setData(Uri.parse("package:"+softInfo.getPackageName()));
+            startActivityForResult(intent, 8);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        ToastUtil.show(mContext, "requestCode: "+requestCode+" resultCode: "+resultCode);
+        if (requestCode==8){
+            fillData();//刷新数据，确保卸载后数据同步展示在列表上
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    /*构建适配器*/
+    private class SoftManagerAdapter extends BaseAdapter {
 
         @Override
         public int getCount() {
-            return mdata==null?0:mdata.size()+2;
+            return mdata == null ? 0 : mdata.size() + 2;
         }
 
         @Override
         public Object getItem(int position) {
-            return mdata==null?0:mdata.get(position);
+            return mdata == null ? 0 : mdata.get(position);
         }
 
         @Override
@@ -172,13 +261,13 @@ public class SoftManagerActivity extends AppCompatActivity {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
 
-            if (position == 0){
+            if (position == 0) {
                 TextView userSoftTv = new TextView(mContext);
                 userSoftTv.setText("用户程序(" + userSoftInfo.size() + ")");
                 userSoftTv.setTextSize(20);
                 userSoftTv.setBackgroundColor(Color.GRAY);
                 return userSoftTv;
-            }else if (position==userSoftInfo.size()+1){
+            } else if (position == userSoftInfo.size() + 1) {
                 TextView systemSoftTv = new TextView(mContext);
                 systemSoftTv.setText("系统程序(" + systemSoftInfo.size() + ")");
                 systemSoftTv.setTextSize(20);
@@ -186,28 +275,28 @@ public class SoftManagerActivity extends AppCompatActivity {
                 return systemSoftTv;
             }
             SoftInfo softInfo = null;
-            if (position < userSoftInfo.size()+1){
-                softInfo = userSoftInfo.get(position-1);
-            }else {
-                softInfo = systemSoftInfo.get(position-userSoftInfo.size()-2);
+            if (position < userSoftInfo.size() + 1) {
+                softInfo = userSoftInfo.get(position - 1);
+            } else {
+                softInfo = systemSoftInfo.get(position - userSoftInfo.size() - 2);
             }
             convertView = LayoutInflater.from(mContext).inflate(R.layout.soft_manager_item, parent, false);
             //通过父控件引用子控件
-            ImageView iconIv = (ImageView)convertView.findViewById(R.id.icon_iv);
+            ImageView iconIv = (ImageView) convertView.findViewById(R.id.icon_iv);
             TextView nameTv = (TextView) convertView.findViewById(R.id.soft_name_tv);
-            TextView versionTv = (TextView)convertView.findViewById(R.id.version_name_tv);
-            TextView isSdcardTv = (TextView)convertView.findViewById(R.id.is_sdcard_tv);
+            TextView versionTv = (TextView) convertView.findViewById(R.id.version_name_tv);
+            TextView isSdcardTv = (TextView) convertView.findViewById(R.id.is_sdcard_tv);
             //对控件进行赋值
             iconIv.setImageDrawable(softInfo.getIcon());
             nameTv.setText(softInfo.getName());
             String version = softInfo.getVersionName();
-            if (version!=null&&version.length()>3){
-                version = version.substring(0,3);
+            if (version != null && version.length() > 3) {
+                version = version.substring(0, 3);
             }
             versionTv.setText(version);
-            if (softInfo.isSdcard()){
+            if (softInfo.isSdcard()) {
                 isSdcardTv.setText("外部存储");
-            }else {
+            } else {
                 isSdcardTv.setText("内部存储");
             }
             return convertView;

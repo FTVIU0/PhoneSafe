@@ -7,35 +7,23 @@
               android:layout_height="80dp">
 
     <TextView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:padding="10dp"
+        android:id="@+id/install_tv"
+        style="@style/MyPopupWindowstyle"
         android:drawableTop="@drawable/ic_intstall"
         android:text="安装"/>
     <TextView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:padding="10dp"
+        android:id="@+id/unstall_tv"
+        style="@style/MyPopupWindowstyle"
         android:drawableTop="@drawable/ic_uninstall"
         android:text="卸载"/>
     <TextView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:padding="10dp"
+        android:id="@+id/share_tv"
+        style="@style/MyPopupWindowstyle"
         android:drawableTop="@drawable/ic_screen_share_black"
         android:text="分享"/>
     <TextView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:padding="10dp"
+        android:id="@+id/detail_tv"
+        style="@style/MyPopupWindowstyle"
         android:drawableTop="@drawable/ic_settings_black"
         android:text="详细"/>
 </LinearLayout>
