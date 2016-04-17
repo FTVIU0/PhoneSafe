@@ -208,14 +208,32 @@ public class SoftManagerActivity extends AppCompatActivity implements View.OnCli
                 uninstallAPK();
                 break;
             case R.id.share_tv:
-                ToastUtil.show(mContext, "share");
+                shareInfo();
                 break;
             case R.id.detail_tv:
-                ToastUtil.show(mContext, "detail");
+                //detailInfo();
                 break;
             default:
                 break;
         }
+    }
+
+    /*分享*/
+    private void shareInfo() {
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_SEND);
+        intent.addCategory(Intent.CATEGORY_DEFAULT);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_TEXT, "Android 学习");//假如分享文本需要附加该属性
+        startActivity(intent);
+    }
+
+    /*获取应用详细信息*/
+    private void detailInfo() {
+        Intent intent = new Intent();
+        intent.setAction("android.intent.action.MAIN");
+        intent.setData(Uri.parse("package:"+softInfo.getPackageName()));
+        startActivity(intent);
     }
 
     /*启动应用
